@@ -1,23 +1,17 @@
 package br.unibh.pessoas;
 
+import java.util.Date;
+
 import br.unibh.pessoas.entidades.Pessoa;
+import br.unibh.pessoas.entidades.PessoaFisica;
 
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Pessoa p1 = new Pessoa();
-		p1.setNome("João");
-		
-		Pessoa p2 = new Pessoa(1L, "Maria");
-		
-		Pessoa p3 = new Pessoa(2L, "Tiago", "Rua A", "3333-2222");
-		
-		System.out.println(p1);
-		System.out.println(p2);
-		System.out.println(p3);
-
+		PessoaFisica pf1 = new PessoaFisica(1l, "Joao", "Rua A", "3333-33333", "111222333444", "joao@gmail.com", new Date(),"M");
+		System.out.println(pf1);
 	}
 
 }

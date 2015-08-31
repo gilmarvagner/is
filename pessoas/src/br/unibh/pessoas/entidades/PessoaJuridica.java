@@ -4,7 +4,7 @@ import java.util.Date;
 public class PessoaJuridica extends Pessoa{
 	
 	
-	
+	//Construtores
 	public PessoaJuridica(Long id, String nome, String endereco,
 			String telefone, String cnpj, Date dataConstituicao, String site) {
 		super(id, nome, endereco, telefone);
@@ -12,6 +12,8 @@ public class PessoaJuridica extends Pessoa{
 		this.dataConstituicao = dataConstituicao;
 		this.site = site;
 	}
+	
+	//Variáveis de instância
 	private String cnpj;
 	private Date dataConstituicao;
 	private String site;

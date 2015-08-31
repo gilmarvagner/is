@@ -3,6 +3,8 @@ import java.util.Date;
 
 public class PessoaFisica extends Pessoa {
 
+	
+	//Construtores
 	public PessoaFisica(Long id, String nome, String endereco, String telefone,
 			String cpf, String email, Date dataNascimento, String sexo) {
 		super(id, nome, endereco, telefone);
@@ -11,6 +13,19 @@ public class PessoaFisica extends Pessoa {
 		this.dataNascimento = dataNascimento;
 		this.sexo = sexo;
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "PessoaFisica [cpf=" + cpf + ", email=" + email
+				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo
+				+ ", toString()=" + super.toString() + "]";
+	}
+
+
+
+	//Variáveis de instância
 	private String cpf;
 	private String email;
 	private Date dataNascimento;
@@ -18,6 +33,8 @@ public class PessoaFisica extends Pessoa {
 	public String getCpf() {
 		return cpf;
 	}
+	
+	//Get's e Set's
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
