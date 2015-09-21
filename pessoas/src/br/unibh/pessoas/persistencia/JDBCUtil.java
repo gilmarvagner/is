@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class JDBCUtil {
+
 	private static Connection con;
 
 	public static Connection getConnection() throws Exception {
@@ -23,4 +24,5 @@ public class JDBCUtil {
 			e.printStackTrace();
 		}
 	}
+
 }
