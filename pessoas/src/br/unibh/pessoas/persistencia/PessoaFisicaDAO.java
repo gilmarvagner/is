@@ -147,7 +147,7 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica, Long> {
 		}
 		return pessoafisica;
 	}
-
+//
 	@Override
 	public PessoaFisica find() {
 		// TODO Auto-generated method stub

@@ -12,7 +12,7 @@ public class PessoaJuridica extends Pessoa{
 		this.dataConstituicao = dataConstituicao;
 		this.site = site;
 	}
-	
+	//
 	//Variáveis de instância
 	private String cnpj;
 	private Date dataConstituicao;

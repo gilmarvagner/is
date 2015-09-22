@@ -14,3 +14,4 @@ public interface DAO <T,K>{
 	public List<T> findAll();
 	PessoaFisica find();
 }
+//
