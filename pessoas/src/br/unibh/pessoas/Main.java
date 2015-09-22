@@ -1,6 +1,5 @@
 package br.unibh.pessoas;
 
-import br.unibh.pessoas.entidades.PessoaFisica;
 import br.unibh.pessoas.persistencia.PessoaFisicaDAO;
 
 
