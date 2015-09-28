@@ -4,8 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
 
 import br.unibh.pessoas.entidades.PessoaJuridica;
 
@@ -17,10 +20,10 @@ private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		PessoaJuridica pessoajuridica = null;
 		try {
 			String sql = "select * from tb_pessoa_juridica where id = ?";
-			PreparedStatement p = JDBCUtil.getConnection().prepareStatement(sql); 
+			PreparedStatement p = JDBCUtil.getConnection().prepareStatement(sql); //trata problemas com sql inject
 			p.setLong(1, id);
 			
-			ResultSet res = p.executeQuery();
+			ResultSet res = p.executeQuery();//ResultSet Guarda os dados vindo do SQL
 			if (res.next()){
 				pessoajuridica = new PessoaJuridica(
 							res.getLong("id"),
@@ -64,7 +67,26 @@ private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	}
 //
 	public void update(PessoaJuridica t) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "update pessoa_juridica set nome = ?, endereco = ?,"
+					+ "telefone = ?,cnpj = ?,data_constituicao = ?, site  = ? where id = ?";
+			PreparedStatement p = JDBCUtil.getConnection().prepareStatement(sql); 
+			
+			p.setString(1, t.getNome());
+			p.setString(2, t.getEndereco());
+			p.setString(3, t.getTelefone());
+			p.setString(4, t.getCnpj());
+			p.setString(5, df.format(t.getDataConstituicao()));
+			p.setString(6, t.getSite());
+			p.setLong(7, t.getId());
+			
+			p.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.closeConnection();
+		}
 		
 	}
 
@@ -83,6 +105,31 @@ private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		}
 		
 	}
+	
+	@Test
+	public void testaPessoaJuridicaAtualizar(){
+		PessoaJuridicaDAO dao = new PessoaJuridicaDAO();
+		PessoaJuridica pf = new PessoaJuridica(null, "Empresa Ciclano", "Rua A", 
+				"3188885555", "11111112222345", new Date(), "empresaciclano.com");
+		
+		dao.insert(pf);
+		
+		PessoaJuridica pf2 = dao.find("Empresa Ciclano");
+		pf2.setNome("Empresa Beltrano");
+		pf2.setSite("empresabeltrano.com");
+		dao.update(pf2);
+		
+		PessoaJuridica pf3 = dao.find("Empresa Beltrano");
+		Assert.assertEquals("empresabeltrano.com", pf3.getSite());
+
+		Assert.assertNotNull(pf2);
+		dao.delete(pf3);
+		
+		PessoaJuridica pf4 = dao.find("Empresa Beltrano");
+		Assert.assertNull(pf4);
+		
+	}
+	
 
 	public List<PessoaJuridica> findAll() {
 		List<PessoaJuridica> listaPesoaFisica = new ArrayList<PessoaJuridica>();
